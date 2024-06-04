@@ -12,6 +12,8 @@ const morgan = require("morgan");//logging http requests, shows the 400, 300 htt
 const port = process.env.PORT ? process.env.PORT : "3000";
 //important to have a port variable to be able to change for the host// 
 
+const authController = require("./controllers/auth.js");
+
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on("connected", () => {
@@ -27,12 +29,10 @@ app.use(morgan('dev'));
 
 /* ------------- Routes ------------ */
 app.get('/', async (req, res) => {
-    res.send('we did it!')
+    res.render('index.ejs');
 });
 
-
-
-
+app.use("/auth", authController);
 
 
 
